@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactFlexyTable from "react-flexy-table";
 import moment from "moment";
-import "../Css/TableReact.scss"
+import "../Css/TableReact.scss";
 import {
   ButtonGroup,
   Button,
@@ -110,7 +110,7 @@ export const TableReact = () => {
       method: "get",
       url: `https://test-api.logisfleet.com/job?currentPage=1&pageSize=${PageSize}&searchQuery&fromDate=${Date1}&toDate=${Date2}`,
       headers: {
-        Authorization:TokenLogin,
+        Authorization: TokenLogin,
       },
     };
 
@@ -142,56 +142,50 @@ export const TableReact = () => {
     } else {
       SetFilterButton(true);
     }
-    
   };
-  const filterToggle =() => {
+  const filterToggle = () => {
     if (FilterTable === false) {
-      SetFilterTable(true)
+      SetFilterTable(true);
+    } else {
+      SetFilterTable(false);
     }
-    else{
-      SetFilterTable(false)
-    }
-
-
-  }
-  const filterToggle2 =() => {
+  };
+  const filterToggle2 = () => {
     if (FilterTable2 === false) {
-      SetFilterTable2(true)
+      SetFilterTable2(true);
+    } else {
+      SetFilterTable2(false);
     }
-    else{
-      SetFilterTable2(false)
-    }
-
-
-  }
+  };
 
   return (
-    <div >
-      <div className="btn-Group" >
-        <ButtonGroup  color="primary" aria-label="outlined primary button group">
-          
-            <br />
-            <TextField
+    <div>
+      <div className="btn-Group">
+        <ButtonGroup color="primary" aria-label="outlined primary button group">
+          <br />
+          <TextField
             label="Start Date"
-              type="date"
-              name="dateAwal"
-              id="dateAwal"
-              onChange={DateChange}
-              placeholder="2021-04-01"
-              value={Date1}
-            ></TextField>
-   
+            type="date"
+            name="dateAwal"
+            id="dateAwal"
+            onChange={DateChange}
+            placeholder="2021-04-01"
+            value={Date1}
+          ></TextField>
 
-            <TextField
-              type="date"
-              label="End Date"
-              name="dateDua"
-              id="dateDua"
-              value={Date2}
-              onChange={DateChange}
-            ></TextField>
-       
-         <FormControl variant="outlined" className="formControl">
+          <TextField
+            type="date"
+            label="End Date"
+            name="dateDua"
+            id="dateDua"
+            value={Date2}
+            onChange={DateChange}
+          ></TextField>
+        </ButtonGroup>
+        <br></br>
+
+        <ButtonGroup color="primary">
+          <FormControl variant="outlined" className="formControl">
             <InputLabel id="demo-simple-select-autowidth-label">
               Page size
             </InputLabel>
@@ -209,21 +203,32 @@ export const TableReact = () => {
               <MenuItem value={500}>500</MenuItem>
             </Select>
           </FormControl>
-
-
-          <Button onClick={filterStart}>Start Filter</Button>
-          
         </ButtonGroup>
+        <br />
+        <ButtonGroup color="primary">
+          <Button color="primary" onClick={filterStart}>
+            Start Filter
+          </Button>
+        </ButtonGroup>
+
         <ButtonGroup color="secondary">
-        <Button type="date" name="filterToggle" id="filterToggle" onClick={filterToggle}>
+          <Button
+            type="date"
+            name="filterToggle"
+            id="filterToggle"
+            onClick={filterToggle}
+          >
             Open Table Filter
           </Button>
-          <Button type="date" name="filterToggle" id="filterToggle" onClick={filterToggle2}>
+          <Button
+            type="date"
+            name="filterToggle"
+            id="filterToggle"
+            onClick={filterToggle2}
+          >
             Open Global Filter
           </Button>
         </ButtonGroup>
-        
-        
       </div>
       <br />
       <br />
