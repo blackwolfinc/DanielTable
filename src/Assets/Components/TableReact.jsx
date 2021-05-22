@@ -18,6 +18,7 @@ export const TableReact = () => {
   const [TokenLogin, setTokenLogin] = useState("");
   const [FilterTable, SetFilterTable] = useState(false);
   const [FilterTable2, SetFilterTable2] = useState(false);
+  const [FilterTable0, SetFilterTable0] = useState("hide");
   const [FilterButton, SetFilterButton] = useState(true);
   const [Date1, SetDate1] = useState("2021-04-01");
   const [Date2, SetDate2] = useState(moment().format("YYYY-MM-DD"));
@@ -99,8 +100,6 @@ export const TableReact = () => {
       .catch((error) => {
         console.log(error);
       });
-
-    // console.log(TokenLogin);
   });
 
   useEffect(() => {
@@ -157,65 +156,33 @@ export const TableReact = () => {
       SetFilterTable2(false);
     }
   };
+  const filterToggle0 = () => {
+    if (FilterTable0 === "hide") {
+      SetFilterTable0("show");
+    } else {
+      SetFilterTable0("hide");
+    }
+  };
 
   return (
     <div>
-      <div className="btn-Group">
-        <ButtonGroup color="primary" aria-label="outlined primary button group">
-          <br />
-          <TextField
-            label="Start Date"
-            type="date"
-            name="dateAwal"
-            id="dateAwal"
-            onChange={DateChange}
-            placeholder="2021-04-01"
-            value={Date1}
-          ></TextField>
-
-          <TextField
-            type="date"
-            label="End Date"
-            name="dateDua"
-            id="dateDua"
-            value={Date2}
-            onChange={DateChange}
-          ></TextField>
-        </ButtonGroup>
-        <br></br>
-
-        <ButtonGroup color="primary">
-          <FormControl variant="outlined" className="formControl">
-            <InputLabel id="demo-simple-select-autowidth-label">
-              Page size
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-autowidth-label"
-              id="demo-simple-select-outlined"
-              // value={age}
-              onChange={DateChange}
-              label="Age"
-              value={PageSize}
-            >
-              <MenuItem value={50}>50</MenuItem>
-              <MenuItem value={100}>100</MenuItem>
-              <MenuItem value={300}>300</MenuItem>
-              <MenuItem value={500}>500</MenuItem>
-            </Select>
-          </FormControl>
-        </ButtonGroup>
-        <br />
-        <ButtonGroup color="primary">
-          <Button color="primary" onClick={filterStart}>
-            Start Filter
-          </Button>
-        </ButtonGroup>
-
+      <div className=" btn-Group">
+        
         <ButtonGroup color="secondary">
           <Button
             type="date"
             name="filterToggle"
             id="filterToggle"
+            color="primary"
+            onClick={filterToggle0}
+          >
+            Open Date Filter
+          </Button>
+          <Button
+            type="date"
+            name="filterToggle"
+            id="filterToggle"
+            color="primary"
             onClick={filterToggle}
           >
             Open Table Filter
@@ -224,6 +191,7 @@ export const TableReact = () => {
             type="date"
             name="filterToggle"
             id="filterToggle"
+            
             onClick={filterToggle2}
           >
             Open Global Filter
@@ -232,6 +200,61 @@ export const TableReact = () => {
       </div>
       <br />
       <br />
+      <div className={FilterTable0}>
+          <ButtonGroup
+            color="primary"
+            aria-label="outlined primary button group"
+          >
+            <br />
+            <TextField
+              label="Start Date"
+              type="date"
+              name="dateAwal"
+              id="dateAwal"
+              onChange={DateChange}
+              placeholder="2021-04-01"
+              value={Date1}
+            ></TextField>
+
+            <TextField
+              type="date"
+              label="End Date"
+              name="dateDua"
+              id="dateDua"
+              value={Date2}
+              onChange={DateChange}
+            ></TextField>
+          </ButtonGroup>
+          <br></br>
+          <br></br>
+
+          <ButtonGroup color="primary">
+            <FormControl variant="outlined" className="formControl">
+              <InputLabel id="demo-simple-select-autowidth-label">
+                Page size
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-outlined"
+                // value={age}
+                onChange={DateChange}
+                label="Age"
+                value={PageSize}
+              >
+                <MenuItem value={50}>50</MenuItem>
+                <MenuItem value={100}>100</MenuItem>
+                <MenuItem value={300}>300</MenuItem>
+                <MenuItem value={500}>500</MenuItem>
+              </Select>
+            </FormControl>
+          </ButtonGroup>
+          <br />  <br></br>
+          <ButtonGroup color="primary">
+            <Button color="primary" onClick={filterStart}>
+              Start Filter
+            </Button>
+          </ButtonGroup>
+        </div>
       <br />
       <ReactFlexyTable
         data={Data}

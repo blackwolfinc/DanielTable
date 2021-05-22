@@ -20,7 +20,14 @@ code {
   border: 1px solid black !important;
   padding: 0px 0px 0px 20px !important;
 }
+._2lyTg{
 
+  margin-top: 2rem;
+  margin-left: 1rem;
+justify-content: flex-start !important;
+padding-bottom: 2rem;
+border-bottom:  1px solid rgba(128, 128, 128, 0.192);
+}
 .rft-table-collapse {
 
   box-shadow:  14px 14px 48px #d6d6d6,
@@ -169,4 +176,8 @@ border-top: 3px solid green;
   60% {
     transform: translateY(0);
   }
+}
+
+.hide {
+  display: none !important;
 }
