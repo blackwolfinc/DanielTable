@@ -198,6 +198,7 @@ export const TableReact = () => {
     <div>
 
       <div className=" btn-Group">
+      
         <ButtonGroup color="secondary">
           <Button
             type="date"
@@ -232,6 +233,7 @@ export const TableReact = () => {
       <br />
       <br />
       <div className={FilterTable0 + " " + "FilteApi"}>
+      <form onSubmit={filterStart}>
         <ButtonGroup color="primary">
         <TextField
             label="Global Search"
@@ -331,10 +333,11 @@ export const TableReact = () => {
 
         
         <ButtonGroup color="primary">
-          <Button color="primary" onClick={filterStart}>
+          <Button color="primary" type="submit" onClick={filterStart}>
             Start Filter
           </Button>
         </ButtonGroup>
+        </form>
       </div>
       
       <br />
