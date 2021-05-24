@@ -192,8 +192,10 @@ setPageNation(e)
   const filterStart = () => {
     if (FilterButton === true) {
       SetFilterButton(false);
+      setPageNation(1)
     } else {
       SetFilterButton(true);
+      setPageNation(1)
     }
   };
   const filterToggle = () => {
