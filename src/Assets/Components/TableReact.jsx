@@ -35,6 +35,11 @@ export const TableReact = () => {
   const [SortColumn, setSortColumn] = useState("");
   const [SortDir, setSortDir] = useState("");
 
+  const [TotalData, setTotalData] = useState(0);
+  const [TotalDraw, setTotalDraw] = useState(0);
+
+
+
   //Header
   const COLUMNS = [
     {
@@ -103,7 +108,6 @@ export const TableReact = () => {
 
   useEffect(() => {
     const axios = require("axios");
-
     let config2 = {
       method: "get",
       url: `https://test-api.logisfleet.com/job?FromDate=${Date1}&ToDate=${Date2}&CurrentPage=${PageNation}&PageSize=${PageSize}&SearchQuery=${GlobalSearch}&SortColumn=${SortColumn}&SortDir=${SortDir}&IsIncludeInactive=true`,
@@ -114,7 +118,12 @@ export const TableReact = () => {
 
     axios(config2)
       .then((response) => {
+      
         setData(response.data.data);
+        setTotalData(response.data.total)
+        setTotalDraw(response.data.draw)
+       
+        
       })
       .catch((error) => {
         console.log(error);
@@ -124,14 +133,20 @@ export const TableReact = () => {
 
   // Function  =====================d
 
+ const ChangeChek =(e)=> {
+setPageNation(e)
+// console.log(e)
+ }
+
+
   const ApiPagnation =(e)=>{
 
-    if(PageNation <= 0 ){
+    if(PageNation <= 1 ){
       setPageNation(1)
    
     }
     if(PageNation >= 0){
-    if (e.target.id === "prev") {
+    if (PageNation > 1 && e.target.id === "prev") {
       setPageNation(PageNation-1 )
         console.log(PageNation)
     }
@@ -139,12 +154,18 @@ export const TableReact = () => {
       setPageNation(PageNation+1 )
       console.log(PageNation)
     }}
+    if(PageNation === TotalData/TotalDraw){
+      setPageNation(PageNation)
+    }
+    if(PageNation === TotalData/TotalDraw && e.target.id === "prev"){
+      setPageNation(PageNation-1 )
+    }
+
   
   }
 
 
   const TableFilter = (e) => {
-    // console.log(e.target.value)
     setSortColumn(e.target.value)
   };
 
@@ -193,7 +214,7 @@ export const TableReact = () => {
       SetFilterTable0("hide");
     }
   };
-
+  
   return (
     <div>
 
@@ -233,7 +254,7 @@ export const TableReact = () => {
       <br />
       <br />
       <div className={FilterTable0 + " " + "FilteApi"}>
-      <form onSubmit={filterStart}>
+      
         <ButtonGroup color="primary">
         <TextField
             label="Global Search"
@@ -337,7 +358,7 @@ export const TableReact = () => {
             Start Filter
           </Button>
         </ButtonGroup>
-        </form>
+
       </div>
       
       <br />
@@ -350,6 +371,17 @@ export const TableReact = () => {
            Prev
           </button>
           </ButtonGroup>
+    
+          <ButtonGroup color="primary">
+            <h5> Total Data  : {TotalData}</h5>
+          </ButtonGroup>
+           <ButtonGroup color="primary">
+            <h5> Row Load  : {TotalDraw}</h5>
+          </ButtonGroup>
+          <ButtonGroup color="primary">
+            <h5>PageNation   : {PageNation} /{TotalData/TotalDraw} </h5>
+          </ButtonGroup>
+
           <ButtonGroup color="primary">
           <button 
            id="next"
@@ -362,13 +394,15 @@ export const TableReact = () => {
       <ReactFlexyTable
         data={Data}
         globalSearch={false}
-        pageSize={100}
+        pageSize={ PageSize}
         columns={COLUMNS}
         sortable={true}
+        totalDataText={TotalData}
         downloadExcelText="Download data"
         showExcelButton={true}
         pageSizeOptions={[50, 100, 300, 500]}
         filterable={FilterTable}
+        onPageChange={ChangeChek}
       />
     </div>
   );
