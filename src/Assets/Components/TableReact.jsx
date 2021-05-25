@@ -39,6 +39,9 @@ export const TableReact = () => {
   const [TotalDraw, setTotalDraw] = useState(0);
 
 
+  let TotalPenjualan  = TotalData / TotalDraw; 
+  let HasilPenjumlahan  = Math.round(TotalPenjualan);
+
 
   //Header
   const COLUMNS = [
@@ -140,12 +143,13 @@ setPageNation(e)
 
 
   const ApiPagnation =(e)=>{
-
+    
     if(PageNation <= 1 ){
       setPageNation(1)
    
     }
     if(PageNation >= 0){
+      
     if (PageNation > 1 && e.target.id === "prev") {
       setPageNation(PageNation-1 )
         console.log(PageNation)
@@ -154,10 +158,10 @@ setPageNation(e)
       setPageNation(PageNation+1 )
       console.log(PageNation)
     }}
-    if(PageNation === TotalData/TotalDraw){
+    if(PageNation === HasilPenjumlahan){
       setPageNation(PageNation)
     }
-    if(PageNation === TotalData/TotalDraw && e.target.id === "prev"){
+    if(PageNation === HasilPenjumlahan && e.target.id === "prev"){
       setPageNation(PageNation-1 )
     }
 
@@ -381,7 +385,7 @@ setPageNation(e)
             <h5> Row Load  : {TotalDraw}</h5>
           </ButtonGroup>
           <ButtonGroup color="primary">
-            <h5>PageNation   : {PageNation} /{TotalData/TotalDraw} </h5>
+            <h5>PageNation   : {PageNation} /{HasilPenjumlahan} </h5>
           </ButtonGroup>
 
           <ButtonGroup color="primary">
