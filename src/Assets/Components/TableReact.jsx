@@ -40,7 +40,7 @@ export const TableReact = () => {
 
 
   let TotalPenjualan  = TotalData / TotalDraw; 
-  let HasilPenjumlahan  = Math.round(TotalPenjualan);
+  let HasilPenjumlahan  = Math.ceil(TotalPenjualan);
 
 
   //Header
